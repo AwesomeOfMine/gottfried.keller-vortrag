@@ -1,0 +1,3151 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gottfried Keller – Leben, Schaffen & Lyrik</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #c9a84c;
+            --dark: #1a1a2e;
+            --cream: #f5f0e8;
+            --warm: #2d2d44;
+            --accent: #8b7355;
+            --text: #333344;
+            --highlight: #fff3cd;
+            --card-bg: #ffffff;
+            --success: #4caf50;
+            --danger: #e53935;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background: var(--cream);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* NAVIGATION */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 26, 46, 0.97);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+        }
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 70px;
+            gap: 5px;
+        }
+        .nav-link {
+            color: var(--cream);
+            text-decoration: none;
+            padding: 12px 28px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            position: relative;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-family: 'Source Sans Pro', sans-serif;
+            border-radius: 6px;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: var(--gold);
+            background: rgba(201, 168, 76, 0.15);
+        }
+        .nav-link.active { box-shadow: 0 0 15px rgba(201, 168, 76, 0.3); }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 6px;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: var(--gold);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        .nav-link:hover::after, .nav-link.active::after { width: 50%; }
+
+        /* SECTIONS */
+        .section {
+            display: none;
+            min-height: 100vh;
+            padding-top: 70px;
+        }
+        .section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* HERO */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--dark) 0%, var(--warm) 100%);
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=80') center/cover;
+            opacity: 0.12;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: var(--cream);
+            max-width: 900px;
+            padding: 2rem;
+        }
+        .hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3rem, 7vw, 6rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: 4px;
+            text-shadow: 3px 3px 15px rgba(0,0,0,0.6);
+        }
+        .hero-subtitle {
+            font-size: 1.5rem;
+            font-weight: 300;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 2rem;
+        }
+        .hero-quote {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.6rem;
+            opacity: 0.95;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+        }
+        .hero-info {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            margin-top: 1rem;
+        }
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            color: var(--gold);
+            font-size: 2.5rem;
+            cursor: pointer;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-15px); }
+            60% { transform: translateX(-50%) translateY(-7px); }
+        }
+
+        /* GLIEDERUNG */
+        .gliederung-section {
+            background: linear-gradient(180deg, var(--cream) 0%, #e8e0d4 100%);
+            min-height: 100vh;
+            padding: 5rem 2rem;
+        }
+        .gliederung-container { max-width: 1000px; margin: 0 auto; }
+        .gliederung-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            text-align: center;
+            color: var(--dark);
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        .gliederung-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: var(--gold);
+            margin: 1rem auto 0;
+            border-radius: 2px;
+        }
+        .gliederung-list { list-style: none; padding: 0; }
+        .gliederung-item {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem 2.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            border-left: 6px solid var(--gold);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .gliederung-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+            border-left-color: var(--dark);
+        }
+        .gliederung-item h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+        .gliederung-item p {
+            font-size: 1.15rem;
+            color: var(--accent);
+        }
+        .gliederung-num {
+            display: inline-block;
+            background: var(--gold);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-right: 1rem;
+            vertical-align: middle;
+        }
+
+        /* CONTENT */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        .section-header h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.2rem, 4vw, 3.5rem);
+            color: var(--dark);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gold);
+            border-radius: 2px;
+        }
+        .section-header p {
+            font-size: 1.25rem;
+            color: var(--accent);
+            max-width: 800px;
+            margin: 2rem auto 0;
+        }
+
+        /* BIOGRAFIE */
+        .bio-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 4rem;
+            align-items: start;
+        }
+        .bio-sidebar { position: sticky; top: 90px; }
+        .bio-image { margin-bottom: 2rem; }
+        .bio-image img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+        .bio-image img:hover { transform: scale(1.02); }
+        .bio-image-caption {
+            text-align: center;
+            margin-top: 1rem;
+            font-style: italic;
+            color: var(--accent);
+            font-size: 1rem;
+        }
+        .bio-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            border-left: 5px solid var(--gold);
+            transition: all 0.3s ease;
+        }
+        .bio-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        }
+        .bio-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        .bio-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        .bio-card ul li {
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+        .bio-card ul li::before {
+            content: '->';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .bio-card ul li strong { color: var(--dark); }
+
+        .timeline {
+            position: relative;
+            padding-left: 2.5rem;
+            margin: 2.5rem 0;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--gold);
+            border-radius: 2px;
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2.5rem;
+            padding-left: 1.5rem;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.5rem;
+            top: 0.5rem;
+            width: 16px;
+            height: 16px;
+            background: var(--gold);
+            border-radius: 50%;
+            transform: translateX(-6px);
+            border: 3px solid var(--cream);
+        }
+        .timeline-year {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 700;
+            color: var(--gold);
+            font-size: 1.4rem;
+            display: block;
+            margin-bottom: 0.4rem;
+        }
+        .timeline-content {
+            font-size: 1.1rem;
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        /* ABENDLIED SPLIT */
+        .poem-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            min-height: calc(100vh - 70px);
+        }
+        .poem-left {
+            background: linear-gradient(180deg, var(--dark) 0%, var(--warm) 100%);
+            color: var(--cream);
+            padding: 4rem 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            position: sticky;
+            top: 70px;
+            height: calc(100vh - 70px);
+            overflow-y: auto;
+        }
+        .poem-left::-webkit-scrollbar { width: 6px; }
+        .poem-left::-webkit-scrollbar-track { background: rgba(255,255,255,0.1); }
+        .poem-left::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+        .poem-left-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+        .poem-left-author {
+            font-size: 1.1rem;
+            opacity: 0.7;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+        .poem-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            line-height: 2.4;
+            text-align: left;
+            max-width: 500px;
+        }
+        .poem-stanza {
+            margin-bottom: 2rem;
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .poem-stanza:hover {
+            background: rgba(201, 168, 76, 0.15);
+            transform: scale(1.02);
+        }
+        .poem-stanza.active {
+            background: rgba(201, 168, 76, 0.25);
+            box-shadow: 0 0 20px rgba(201, 168, 76, 0.3);
+            border-left: 4px solid var(--gold);
+        }
+        .poem-stanza-num {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--dark);
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 28px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .poem-right {
+            background: var(--cream);
+            padding: 3rem;
+            overflow-y: auto;
+            max-height: calc(100vh - 70px);
+        }
+        .poem-right::-webkit-scrollbar { width: 8px; }
+        .poem-right::-webkit-scrollbar-track { background: #e0d8cc; }
+        .poem-right::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 4px; }
+
+        .analysis-card {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border-top: 5px solid var(--gold);
+            margin-bottom: 2rem;
+        }
+        .analysis-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+        }
+        .analysis-card.highlighted {
+            border-top-color: var(--dark);
+            background: var(--highlight);
+            box-shadow: 0 0 25px rgba(201, 168, 76, 0.2);
+        }
+        .analysis-card h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            color: var(--dark);
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        .analysis-card p, .analysis-card ul {
+            font-size: 1.1rem;
+            color: var(--text);
+            line-height: 1.9;
+        }
+        .analysis-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        .analysis-card ul li {
+            padding-left: 1.8rem;
+            position: relative;
+            margin-bottom: 0.8rem;
+        }
+        .analysis-card ul li::before {
+            content: '->';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .stanza-ref {
+            display: inline-block;
+            background: var(--gold);
+            color: white;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-left: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .stanza-ref:hover {
+            background: var(--dark);
+            transform: scale(1.1);
+        }
+        .highlight-box {
+            background: var(--dark);
+            color: var(--cream);
+            padding: 2.5rem;
+            border-radius: 16px;
+            margin: 3rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .highlight-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, var(--gold) 0%, transparent 70%);
+            opacity: 0.1;
+        }
+        .highlight-box h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.7rem;
+            color: var(--gold);
+            margin-bottom: 1.2rem;
+        }
+        .highlight-box p {
+            font-size: 1.15rem;
+            line-height: 1.9;
+        }
+
+        /* QUIZ */
+        .quiz-section {
+            background: linear-gradient(180deg, var(--cream) 0%, #e8e0d4 100%);
+            min-height: 100vh;
+            padding: 4rem 2rem;
+        }
+        .quiz-container { max-width: 900px; margin: 0 auto; }
+        .quiz-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            border-left: 5px solid var(--gold);
+        }
+        .quiz-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+        }
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .quiz-option {
+            padding: 1rem 1.5rem;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            background: white;
+        }
+        .quiz-option:hover {
+            border-color: var(--gold);
+            background: var(--highlight);
+        }
+        .quiz-option.correct {
+            border-color: var(--success);
+            background: #e8f5e9;
+        }
+        .quiz-option.wrong {
+            border-color: var(--danger);
+            background: #ffebee;
+        }
+        .quiz-option.selected {
+            border-color: var(--gold);
+            background: var(--highlight);
+        }
+        .quiz-input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-family: 'Source Sans Pro', sans-serif;
+            margin-bottom: 1rem;
+        }
+        .quiz-input:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+        .quiz-btn {
+            padding: 12px 30px;
+            background: var(--gold);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .quiz-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(201, 168, 76, 0.4);
+        }
+        .quiz-result {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 10px;
+            font-weight: 600;
+            display: none;
+        }
+        .quiz-result.show { display: block; }
+        .quiz-result.correct {
+            background: #e8f5e9;
+            color: var(--success);
+        }
+        .quiz-result.wrong {
+            background: #ffebee;
+            color: var(--danger);
+        }
+        .nickname-input {
+            max-width: 400px;
+            margin: 0 auto 3rem;
+            text-align: center;
+        }
+        .nickname-input h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+        .nickname-input input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--gold);
+            border-radius: 10px;
+            font-size: 1.2rem;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        .leaderboard {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-top: 3rem;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+        }
+        .leaderboard h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .leaderboard-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+            font-size: 1.1rem;
+        }
+        .leaderboard-item:first-child {
+            background: var(--highlight);
+            border-radius: 10px;
+            font-weight: 700;
+        }
+        .leaderboard-rank {
+            font-weight: 700;
+            color: var(--gold);
+            font-size: 1.3rem;
+            width: 40px;
+        }
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+        .modal-overlay.show { display: flex; }
+        .modal {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        .modal h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+        .modal p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+        .modal-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+        .modal-btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .modal-btn.yes {
+            background: var(--danger);
+            color: white;
+        }
+        .modal-btn.no {
+            background: var(--success);
+            color: white;
+        }
+        .modal-btn:hover { transform: scale(1.05); }
+
+        /* SCHLUSS */
+        .farewell-section {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--warm) 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .farewell-section::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=80') center/cover;
+            opacity: 0.08;
+        }
+        .farewell-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 900px;
+            color: var(--cream);
+        }
+        .farewell-content h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 2rem;
+            color: var(--gold);
+        }
+        .farewell-content p {
+            font-size: 1.3rem;
+            line-height: 2;
+            margin-bottom: 1.5rem;
+            opacity: 0.95;
+        }
+        .farewell-quote {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.6rem;
+            color: var(--gold);
+            margin: 2rem 0;
+            padding: 2rem;
+            border-top: 2px solid rgba(201, 168, 76, 0.3);
+            border-bottom: 2px solid rgba(201, 168, 76, 0.3);
+        }
+        .farewell-btn {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 15px 40px;
+            background: var(--gold);
+            color: var(--dark);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+        }
+        .farewell-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(201, 168, 76, 0.4);
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--dark);
+            color: var(--cream);
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+        footer p {
+            font-size: 1rem;
+            opacity: 0.7;
+        }
+
+        /* RESPONSIVE */
+        /* Old tablet styles replaced by comprehensive responsive CSS above */
+        /* Old mobile styles replaced by comprehensive responsive CSS above */
+
+        /* UTILITY */
+        .intro-text {
+            font-size: 1.3rem;
+            line-height: 2;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto 3rem;
+            color: var(--text);
+        }
+        .divider {
+            width: 120px;
+            height: 3px;
+            background: var(--gold);
+            margin: 3rem auto;
+            border-radius: 2px;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .gallery img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 12px;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        .gallery img:hover { transform: scale(1.03); }
+        /* Old gallery styles replaced by comprehensive responsive CSS above */
+    
+        /* ============================================================
+           RESPONSIVE DESIGN - PC, Tablet, Mobile Portrait & Landscape
+           ============================================================ */
+
+        /* ---------- LARGE DESKTOP (1400px+) ---------- */
+        @media (min-width: 1400px) {
+            .poem-split {
+                grid-template-columns: 45% 55%;
+            }
+            .poem-left {
+                padding: 4rem 4rem;
+            }
+            .poem-text {
+                font-size: 1.5rem;
+                line-height: 2.6;
+            }
+            .poem-right {
+                padding: 4rem;
+            }
+            .analysis-card {
+                padding: 3rem;
+            }
+            .bio-grid {
+                grid-template-columns: 400px 1fr;
+                gap: 5rem;
+            }
+        }
+
+        /* ---------- DESKTOP / LAPTOP (1025px - 1399px) ---------- */
+        @media (min-width: 1025px) and (max-width: 1399px) {
+            .poem-split {
+                grid-template-columns: 42% 58%;
+            }
+            .poem-left {
+                padding: 3rem 2.5rem;
+            }
+            .poem-text {
+                font-size: 1.35rem;
+                line-height: 2.4;
+            }
+            .bio-grid {
+                grid-template-columns: 350px 1fr;
+                gap: 3rem;
+            }
+        }
+
+        /* ---------- TABLET LANDSCAPE (769px - 1024px) ---------- */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .poem-split {
+                grid-template-columns: 1fr;
+            }
+            .poem-left {
+                position: relative;
+                top: 0;
+                height: auto;
+                min-height: auto;
+                padding: 3rem 2rem;
+            }
+            .poem-right {
+                max-height: none;
+                padding: 2.5rem;
+            }
+            .bio-grid {
+                grid-template-columns: 1fr;
+            }
+            .bio-sidebar {
+                position: relative;
+                top: 0;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+            }
+            .bio-image {
+                margin-bottom: 0;
+            }
+            .nav-link {
+                padding: 10px 20px;
+                font-size: 0.95rem;
+                letter-spacing: 1px;
+            }
+            .gallery {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* ---------- TABLET PORTRAIT (481px - 768px) ---------- */
+        @media (min-width: 481px) and (max-width: 768px) {
+            .nav-container {
+                height: 60px;
+                flex-wrap: wrap;
+                gap: 2px;
+                padding: 0 0.5rem;
+            }
+            .nav-link {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+                letter-spacing: 1px;
+            }
+            .section {
+                padding-top: 60px;
+            }
+            .hero h1 {
+                font-size: clamp(2.5rem, 10vw, 4rem);
+            }
+            .hero-quote {
+                font-size: 1.3rem;
+            }
+            .poem-split {
+                grid-template-columns: 1fr;
+            }
+            .poem-left {
+                position: relative;
+                top: 0;
+                height: auto;
+                min-height: auto;
+                padding: 2.5rem 1.5rem;
+            }
+            .poem-text {
+                font-size: 1.25rem;
+                line-height: 2.2;
+            }
+            .poem-right {
+                max-height: none;
+                padding: 2rem 1.5rem;
+            }
+            .analysis-card {
+                padding: 1.8rem;
+            }
+            .bio-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .bio-sidebar {
+                position: relative;
+                top: 0;
+            }
+            .bio-card {
+                padding: 1.5rem;
+            }
+            .container {
+                padding: 2rem 1.5rem;
+            }
+            .gliederung-item {
+                padding: 1.5rem;
+            }
+            .gliederung-item h3 {
+                font-size: 1.4rem;
+            }
+            .gallery {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+            .gallery img {
+                height: 180px;
+            }
+            .quiz-card {
+                padding: 1.8rem;
+            }
+            .quiz-option {
+                padding: 0.9rem 1.2rem;
+                font-size: 1rem;
+            }
+            .timeline {
+                padding-left: 2rem;
+            }
+            .timeline-item::before {
+                left: -2rem;
+                width: 14px;
+                height: 14px;
+            }
+            .farewell-content p {
+                font-size: 1.1rem;
+            }
+            .farewell-quote {
+                font-size: 1.3rem;
+                padding: 1.5rem;
+            }
+        }
+
+        /* ---------- MOBILE LANDSCAPE (max-height: 500px AND min-width: 481px) ---------- */
+        @media (max-height: 500px) and (min-width: 481px) and (orientation: landscape) {
+            .nav-container {
+                height: 50px;
+            }
+            .nav-link {
+                padding: 4px 10px;
+                font-size: 0.75rem;
+            }
+            .section {
+                padding-top: 50px;
+            }
+            .hero {
+                height: auto;
+                min-height: 100vh;
+                padding: 3rem 1rem;
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .hero-quote {
+                font-size: 1.1rem;
+                margin-bottom: 1.5rem;
+            }
+            .scroll-indicator {
+                display: none;
+            }
+            .poem-split {
+                grid-template-columns: 1fr 1fr;
+            }
+            .poem-left {
+                position: relative;
+                top: 0;
+                height: auto;
+                min-height: auto;
+                padding: 2rem 1.5rem;
+            }
+            .poem-text {
+                font-size: 1.1rem;
+                line-height: 2;
+            }
+            .poem-right {
+                max-height: none;
+                padding: 2rem 1.5rem;
+            }
+            .bio-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+            }
+            .bio-sidebar {
+                position: relative;
+                top: 0;
+            }
+            .container {
+                padding: 2rem 1.5rem;
+            }
+            .gallery {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .gallery img {
+                height: 140px;
+            }
+        }
+
+        /* ---------- MOBILE PORTRAIT (max-width: 480px) ---------- */
+        @media (max-width: 480px) {
+            .nav-container {
+                height: 55px;
+                gap: 1px;
+                padding: 0 0.3rem;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                justify-content: flex-start;
+            }
+            .nav-link {
+                padding: 5px 8px;
+                font-size: 0.7rem;
+                letter-spacing: 0.5px;
+                white-space: nowrap;
+                flex-shrink: 0;
+            }
+            .section {
+                padding-top: 55px;
+            }
+            .hero {
+                height: auto;
+                min-height: 100vh;
+                padding: 2rem 1rem;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+                letter-spacing: 2px;
+            }
+            .hero-subtitle {
+                font-size: 1rem;
+                letter-spacing: 3px;
+            }
+            .hero-quote {
+                font-size: 1.1rem;
+                line-height: 1.6;
+            }
+            .hero-info {
+                font-size: 0.95rem;
+            }
+            .scroll-indicator {
+                display: none;
+            }
+            .poem-split {
+                grid-template-columns: 1fr;
+            }
+            .poem-left {
+                position: relative;
+                top: 0;
+                height: auto;
+                min-height: auto;
+                padding: 2rem 1rem;
+            }
+            .poem-left-title {
+                font-size: 2rem;
+            }
+            .poem-text {
+                font-size: 1.15rem;
+                line-height: 2;
+                max-width: 100%;
+            }
+            .poem-stanza {
+                padding: 0.8rem 1rem;
+                margin-bottom: 1.5rem;
+            }
+            .poem-right {
+                max-height: none;
+                padding: 1.5rem 1rem;
+            }
+            .analysis-card {
+                padding: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+            .analysis-card h4 {
+                font-size: 1.3rem;
+            }
+            .analysis-card p, .analysis-card ul {
+                font-size: 1rem;
+                line-height: 1.8;
+            }
+            .highlight-box {
+                padding: 1.5rem;
+                margin: 2rem 0;
+            }
+            .highlight-box h4 {
+                font-size: 1.4rem;
+            }
+            .bio-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            .bio-sidebar {
+                position: relative;
+                top: 0;
+            }
+            .bio-image img {
+                border-radius: 8px;
+            }
+            .bio-card {
+                padding: 1.2rem;
+                margin-bottom: 1.5rem;
+            }
+            .bio-card h3 {
+                font-size: 1.3rem;
+            }
+            .bio-card ul li {
+                font-size: 1rem;
+                padding-left: 1.2rem;
+            }
+            .container {
+                padding: 1.5rem 1rem;
+            }
+            .section-header {
+                margin-bottom: 2.5rem;
+            }
+            .section-header h2 {
+                font-size: clamp(1.8rem, 6vw, 2.5rem);
+            }
+            .section-header p {
+                font-size: 1.05rem;
+            }
+            .intro-text {
+                font-size: 1.1rem;
+                line-height: 1.8;
+            }
+            .gliederung-section {
+                padding: 3rem 1rem;
+            }
+            .gliederung-title {
+                font-size: clamp(2rem, 8vw, 3rem);
+            }
+            .gliederung-item {
+                padding: 1.2rem;
+                margin-bottom: 1rem;
+            }
+            .gliederung-item h3 {
+                font-size: 1.2rem;
+            }
+            .gliederung-item p {
+                font-size: 1rem;
+            }
+            .gliederung-num {
+                width: 32px;
+                height: 32px;
+                line-height: 32px;
+                font-size: 1rem;
+            }
+            .gallery {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            .gallery img {
+                height: 200px;
+            }
+            .timeline {
+                padding-left: 1.8rem;
+            }
+            .timeline-item {
+                margin-bottom: 1.8rem;
+                padding-left: 1rem;
+            }
+            .timeline-item::before {
+                left: -1.8rem;
+                width: 12px;
+                height: 12px;
+            }
+            .timeline-year {
+                font-size: 1.2rem;
+            }
+            .timeline-content {
+                font-size: 1rem;
+            }
+            .quiz-section {
+                padding: 2rem 1rem;
+            }
+            .quiz-card {
+                padding: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+            .quiz-card h3 {
+                font-size: 1.3rem;
+            }
+            .quiz-option {
+                padding: 0.8rem 1rem;
+                font-size: 1rem;
+            }
+            .quiz-btn {
+                padding: 10px 24px;
+                font-size: 1rem;
+            }
+            .nickname-input h3 {
+                font-size: 1.6rem;
+            }
+            .nickname-input input {
+                font-size: 1.1rem;
+            }
+            .leaderboard {
+                padding: 1.5rem;
+            }
+            .leaderboard h3 {
+                font-size: 1.5rem;
+            }
+            .leaderboard-item {
+                padding: 0.8rem;
+                font-size: 1rem;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.3rem;
+            }
+            .leaderboard-rank {
+                font-size: 1.1rem;
+            }
+            .modal {
+                padding: 2rem;
+                margin: 1rem;
+                max-width: calc(100% - 2rem);
+            }
+            .modal h3 {
+                font-size: 1.6rem;
+            }
+            .modal p {
+                font-size: 1rem;
+            }
+            .modal-btn {
+                padding: 10px 24px;
+                font-size: 0.9rem;
+            }
+            .farewell-section {
+                padding: 2rem 1rem;
+            }
+            .farewell-content h2 {
+                font-size: clamp(2rem, 8vw, 3rem);
+            }
+            .farewell-content p {
+                font-size: 1.05rem;
+                line-height: 1.8;
+            }
+            .farewell-quote {
+                font-size: 1.2rem;
+                padding: 1.5rem;
+                margin: 1.5rem 0;
+            }
+            .farewell-btn {
+                padding: 12px 30px;
+                font-size: 1rem;
+            }
+            footer {
+                padding: 2rem 1rem;
+            }
+        }
+
+        /* ---------- VERY SMALL MOBILE (max-width: 360px) ---------- */
+        @media (max-width: 360px) {
+            .nav-link {
+                padding: 4px 6px;
+                font-size: 0.65rem;
+                letter-spacing: 0.3px;
+            }
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            .hero-quote {
+                font-size: 1rem;
+            }
+            .poem-text {
+                font-size: 1.05rem;
+            }
+            .analysis-card h4 {
+                font-size: 1.15rem;
+            }
+            .quiz-card h3 {
+                font-size: 1.15rem;
+            
+            }
+        }
+
+        /* ---------- TOUCH DEVICE OPTIMIZATIONS ---------- */
+        @media (hover: none) and (pointer: coarse) {
+            .poem-stanza:hover {
+                transform: none;
+            }
+            .analysis-card:hover {
+                transform: none;
+            }
+            .bio-card:hover {
+                transform: none;
+            }
+            .gliederung-item:hover {
+                transform: none;
+            }
+            .gallery img:hover {
+                transform: none;
+            }
+            .bio-image img:hover {
+                transform: none;
+            }
+            .nav-link:hover {
+                background: none;
+            }
+            .nav-link:hover::after {
+                width: 0;
+            }
+            .nav-link.active {
+                background: rgba(201, 168, 76, 0.15);
+            }
+            .nav-link.active::after {
+                width: 50%;
+            
+            }
+        }
+
+        /* ---------- REDUCED MOTION PREFERENCE ---------- */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            html {
+                scroll-behavior: auto;
+            }
+        }
+
+        /* ============================================================
+           HAMBURGER NAVIGATION MENU - COMPACT ALL-VISIBLE DROPDOWN
+           ============================================================ */
+        .nav-brand {
+            display: none;
+            color: var(--gold);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 48px;
+            height: 48px;
+            background: none;
+            border: 2px solid var(--gold);
+            border-radius: 10px;
+            cursor: pointer;
+            padding: 11px;
+            gap: 5px;
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+
+        .nav-toggle:hover {
+            background: rgba(201, 168, 76, 0.15);
+            box-shadow: 0 0 15px rgba(201, 168, 76, 0.3);
+        }
+
+        .nav-toggle-bar {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--gold);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            transform-origin: center;
+        }
+
+        .nav-toggle.open .nav-toggle-bar:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .nav-toggle.open .nav-toggle-bar:nth-child(2) {
+            opacity: 0;
+            transform: scaleX(0);
+        }
+
+        .nav-toggle.open .nav-toggle-bar:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 5px;
+            transition: all 0.4s ease;
+        }
+
+        .nav-menu.open {
+            display: flex;
+        }
+
+        /* ---------- TABLET PORTRAIT & BELOW (max-width: 768px) ---------- */
+        @media (max-width: 768px) {
+            .nav-container {
+                justify-content: space-between;
+                padding: 0 1.5rem;
+                position: relative;
+            }
+
+            .nav-brand {
+                display: block;
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+
+            .nav-menu {
+                display: none;
+                position: fixed;
+                top: 70px;
+                right: 0;
+                left: 0;
+                width: 100%;
+                min-width: 100%;
+                max-width: 100%;
+                height: calc(100vh - 70px);
+                max-height: calc(100vh - 70px);
+                background: linear-gradient(180deg, rgba(26, 26, 46, 0.98) 0%, rgba(45, 45, 68, 0.98) 100%);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                border-radius: 0;
+                border: none;
+                box-shadow: none;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                padding: 2rem 0;
+                gap: 0.5rem;
+                z-index: 999;
+                overflow-y: auto;
+                transform-origin: top center;
+            }
+
+            .nav-menu.open {
+                display: flex;
+                animation: menuDrop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            }
+
+            @keyframes menuDrop {
+                0% {
+                    opacity: 0;
+                    transform: translateY(-15px) scale(0.95);
+                }
+                100% {
+                    opacity: 1;
+                    transform: translateY(0) scale(1);
+                }
+            }
+
+            .nav-link {
+                width: auto;
+                min-width: 220px;
+                padding: 18px 2rem;
+                border-radius: 12px;
+                text-align: center;
+                border-bottom: none;
+                font-size: 1.2rem;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                font-weight: 600;
+                background: transparent;
+                transition: all 0.2s ease;
+                white-space: nowrap;
+                line-height: 1.4;
+                margin: 0.3rem 1.5rem;
+            }
+
+            .nav-link:last-child {
+                border-bottom: none;
+            }
+
+            .nav-link:hover, .nav-link.active {
+                background: rgba(201, 168, 76, 0.2);
+                color: var(--gold);
+            }
+
+            .nav-link::after {
+                display: none;
+            }
+
+            .nav-link.active {
+                background: rgba(201, 168, 76, 0.25);
+                border-left: none;
+                box-shadow: 0 0 20px rgba(201, 168, 76, 0.3);
+            }
+        }
+
+        /* ---------- MOBILE LANDSCAPE (max-height: 500px) ---------- */
+        @media (max-height: 500px) and (min-width: 481px) and (orientation: landscape) {
+            .nav-container {
+                justify-content: space-between;
+                padding: 0 1.5rem;
+                position: relative;
+            }
+
+            .nav-brand {
+                display: block;
+                font-size: 1.2rem;
+            }
+
+            .nav-toggle {
+                display: flex;
+                width: 42px;
+                height: 42px;
+                padding: 9px;
+                gap: 4px;
+            }
+
+            .nav-toggle-bar {
+                width: 20px;
+            }
+
+            .nav-menu {
+                display: none;
+                position: fixed;
+                top: 50px;
+                right: 0;
+                left: 0;
+                width: 100%;
+                min-width: 100%;
+                max-width: 100%;
+                height: calc(100vh - 50px);
+                max-height: calc(100vh - 50px);
+                background: linear-gradient(180deg, rgba(26, 26, 46, 0.98) 0%, rgba(45, 45, 68, 0.98) 100%);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                border-radius: 0;
+                border: none;
+                box-shadow: none;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                padding: 1rem 0;
+                gap: 0.3rem;
+                z-index: 999;
+                overflow-y: auto;
+                transform-origin: top center;
+            }
+
+            .nav-menu.open {
+                display: flex;
+                animation: menuDrop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            }
+
+            .nav-link {
+                width: auto;
+                min-width: 180px;
+                padding: 12px 1.5rem;
+                border-radius: 10px;
+                text-align: center;
+                border-bottom: none;
+                font-size: 1rem;
+                letter-spacing: 1.5px;
+                background: transparent;
+                transition: all 0.2s ease;
+                white-space: nowrap;
+                line-height: 1.3;
+                margin: 0.2rem 1rem;
+            }
+
+            .nav-link:last-child {
+                border-bottom: none;
+            }
+
+            .nav-link:hover, .nav-link.active {
+                background: rgba(201, 168, 76, 0.2);
+                color: var(--gold);
+            }
+
+            .nav-link::after {
+                display: none;
+            }
+
+            .nav-link.active {
+                background: rgba(201, 168, 76, 0.25);
+                border-left: none;
+                box-shadow: 0 0 15px rgba(201, 168, 76, 0.3);
+            }
+        }
+
+        /* ---------- MOBILE PORTRAIT (max-width: 480px) ---------- */
+        @media (max-width: 480px) {
+            .nav-container {
+                justify-content: space-between;
+                padding: 0 1rem;
+                position: relative;
+            }
+
+            .nav-brand {
+                display: block;
+                font-size: 1.2rem;
+            }
+
+            .nav-toggle {
+                display: flex;
+                width: 46px;
+                height: 46px;
+                padding: 10px;
+                gap: 5px;
+            }
+
+            .nav-toggle-bar {
+                width: 22px;
+            }
+
+            .nav-menu {
+                display: none;
+                position: fixed;
+                top: 55px;
+                right: 0;
+                left: 0;
+                width: 100%;
+                min-width: 100%;
+                max-width: 100%;
+                height: calc(100vh - 55px);
+                max-height: calc(100vh - 55px);
+                background: linear-gradient(180deg, rgba(26, 26, 46, 0.98) 0%, rgba(45, 45, 68, 0.98) 100%);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                border-radius: 0;
+                border: none;
+                box-shadow: none;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                padding: 2rem 0;
+                gap: 0.5rem;
+                z-index: 999;
+                overflow-y: auto;
+                transform-origin: top center;
+            }
+
+            .nav-menu.open {
+                display: flex;
+                animation: menuDrop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            }
+
+            .nav-link {
+                width: auto;
+                min-width: 200px;
+                padding: 18px 2rem;
+                border-radius: 12px;
+                text-align: center;
+                border-bottom: none;
+                font-size: 1.3rem;
+                letter-spacing: 2px;
+                background: transparent;
+                transition: all 0.2s ease;
+                white-space: nowrap;
+                line-height: 1.4;
+                margin: 0.3rem 1rem;
+            }
+
+            .nav-link:last-child {
+                border-bottom: none;
+            }
+
+            .nav-link:hover, .nav-link.active {
+                background: rgba(201, 168, 76, 0.2);
+                color: var(--gold);
+            }
+
+            .nav-link::after {
+                display: none;
+            }
+
+            .nav-link.active {
+                background: rgba(201, 168, 76, 0.25);
+                border-left: none;
+                box-shadow: 0 0 20px rgba(201, 168, 76, 0.3);
+            }
+        }
+
+        /* ---------- VERY SMALL MOBILE (max-width: 360px) ---------- */
+        @media (max-width: 360px) {
+            .nav-brand {
+                font-size: 1.05rem;
+            }
+
+            .nav-toggle {
+                width: 42px;
+                height: 42px;
+                padding: 9px;
+            }
+
+            .nav-toggle-bar {
+                width: 20px;
+            }
+
+            .nav-menu {
+                top: 55px;
+                right: 0;
+                left: 0;
+                min-width: 100%;
+                max-width: 100%;
+                height: calc(100vh - 55px);
+                max-height: calc(100vh - 55px);
+                border-radius: 0;
+                padding: 1.5rem 0;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .nav-link {
+                padding: 14px 1.5rem;
+                font-size: 1.1rem;
+                line-height: 1.3;
+                width: auto;
+                min-width: 170px;
+                text-align: center;
+                border-radius: 10px;
+                margin: 0.2rem 1rem;
+            }
+        }
+
+        /* Overlay when menu is open - prevents scrolling */
+        .nav-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.15);
+            z-index: 998;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-overlay.show {
+            display: block;
+            opacity: 1;
+        }
+
+        /* ============================================================
+           HIDE SCROLLBARS ON MOBILE DEVICES
+           ============================================================ */
+        @media (max-width: 768px) {
+            /* Chrome, Safari, Edge */
+            .poem-right::-webkit-scrollbar,
+            .poem-left::-webkit-scrollbar,
+            body::-webkit-scrollbar {
+                display: none;
+            }
+            /* Firefox */
+            .poem-right, .poem-left, body {
+                scrollbar-width: none;
+            }
+            /* IE/Edge legacy */
+            .poem-right, .poem-left, body {
+                -ms-overflow-style: none;
+            }
+        }
+
+        @media (max-height: 500px) and (min-width: 481px) and (orientation: landscape) {
+            .poem-right::-webkit-scrollbar,
+            .poem-left::-webkit-scrollbar,
+            body::-webkit-scrollbar {
+                display: none;
+            }
+            .poem-right, .poem-left, body {
+                scrollbar-width: none;
+            }
+            .poem-right, .poem-left, body {
+                -ms-overflow-style: none;
+            }
+        }
+
+        /* HANDOUT */
+        .handout-section {
+            background: linear-gradient(180deg, var(--cream) 0%, #e8e0d4 100%);
+            min-height: 100vh;
+            padding: 5rem 2rem;
+        }
+        .handout-container {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .handout-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            color: var(--dark);
+            margin-bottom: 1rem;
+            position: relative;
+        }
+        .handout-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: var(--gold);
+            margin: 1rem auto 0;
+            border-radius: 2px;
+        }
+        .handout-subtitle {
+            font-size: 1.25rem;
+            color: var(--accent);
+            max-width: 700px;
+            margin: 2rem auto 3rem;
+            line-height: 1.8;
+        }
+        .handout-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            border-top: 5px solid var(--gold);
+        }
+        .handout-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+        }
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 18px 45px;
+            background: var(--gold);
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+            border: none;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+        .download-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(201, 168, 76, 0.4);
+            background: var(--dark);
+            color: var(--gold);
+        }
+        .download-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+        .handout-info {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .handout-info-item {
+            background: rgba(201, 168, 76, 0.1);
+            padding: 1.5rem;
+            border-radius: 12px;
+        }
+        .handout-info-item h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+        .handout-info-item p {
+            font-size: 1rem;
+            color: var(--accent);
+        }
+
+        @media (max-width: 768px) {
+            .handout-section {
+                padding: 3rem 1rem;
+            }
+            .handout-card {
+                padding: 2rem 1.5rem;
+            }
+            .handout-info {
+                grid-template-columns: 1fr;
+            }
+        }
+        @media (max-width: 480px) {
+            .download-btn {
+                padding: 14px 30px;
+                font-size: 1rem;
+            }
+        }
+
+</style>
+
+<base target="_blank">
+<base target="_blank">
+<base target="_blank">
+</head>
+<body>
+
+    <nav>
+        <div class="nav-container">
+            <div class="nav-brand">Gottfried Keller</div>
+            <button class="nav-toggle" onclick="toggleNav()" aria-label="Menü öffnen">
+                <span class="nav-toggle-bar"></span>
+                <span class="nav-toggle-bar"></span>
+                <span class="nav-toggle-bar"></span>
+            </button>
+            <div class="nav-menu" id="nav-menu">
+                <button class="nav-link active" onclick="showSection('start'); closeNav();">Startseite</button>
+                <button class="nav-link" onclick="showSection('gliederung'); closeNav();">Gliederung</button>
+                <button class="nav-link" onclick="showSection('biografie'); closeNav();">Biografie</button>
+                <button class="nav-link" onclick="showSection('abendlied'); closeNav();">Abendlied</button>
+                <button class="nav-link" onclick="showSection('quiz'); closeNav();">Quiz</button>
+                <button class="nav-link" onclick="showSection('handout'); closeNav();">Handout</button>
+                <button class="nav-link" onclick="showSection('schluss'); closeNav();">Schluss</button>
+            </div>
+        </div>
+    </nav>
+    <div class="nav-overlay" onclick="closeNav()"></div>
+
+    <!-- STARTSEITE -->
+    <section id="start" class="section active">
+        <div class="hero">
+            <div class="hero-content">
+                <h1>Gottfried Keller</h1>
+                <p class="hero-subtitle">Dichter des Realismus</p>
+                <p class="hero-quote">Wer die Welt nicht mit seinen Augen sieht, sieht sie überhaupt nicht.</p>
+                <p class="hero-info">1819 - 1890 . Zürich . Schweiz</p>
+            </div>
+            <div class="scroll-indicator" onclick="showSection('gliederung')">v</div>
+        </div>
+
+        <div class="container">
+            <div class="section-header">
+                <h2>Willkommen</h2>
+                <p>Entdecken Sie Leben und Werk des bedeutendsten Schweizer Dichters des 19. Jahrhunderts</p>
+            </div>
+
+            <p class="intro-text">
+                Gottfried Keller zählt zu den herausragenden Gestalten der deutschsprachigen Literatur. 
+                Als Romancier, Novellist und Lyriker prägte er den literarischen Realismus nachhaltig. 
+                Diese Präsentation führt Sie durch sein bewegtes Leben und analysiert sein berührendes Gedicht 
+                Abendlied - ein Meisterwerk der späten Lyrik.
+            </p>
+
+            <div class="divider"></div>
+
+            <div class="gallery">
+                <img src="https://kimi-web-img.moonshot.cn/img/upload.wikimedia.org/2a3aff3e8c53edbb43a5311567dcbe5c3b666077.jpg" alt="Gottfried Keller Porträt 1872">
+                <img src="https://kimi-web-img.moonshot.cn/img/upload.wikimedia.org/66259e072f3a4e6ed305959a4e4c472d6056bc73.jpeg" alt="Gottfried Keller Fotografie">
+                <img src="https://kimi-web-img.moonshot.cn/img/upload.wikimedia.org/369b9bf4d58e82dce77a7ab9bb0e615fe572371e.jpg" alt="Gottfried Keller Porträt">
+            </div>
+
+
+        </div>
+    </section>
+
+    <!-- GLIEDERUNG -->
+    <section id="gliederung" class="section">
+        <div class="gliederung-section">
+            <div class="gliederung-container">
+                <h2 class="gliederung-title">Gliederung der Präsentation</h2>
+
+                <ul class="gliederung-list">
+                    <li class="gliederung-item" onclick="showSection('biografie')">
+                        <h3><span class="gliederung-num">1</span> Biografie</h3>
+                        <p>Leben, Familie, Werdegang vom Maler zum Dichter, größte Erfolge</p>
+                    </li>
+                    <li class="gliederung-item" onclick="showSection('abendlied')">
+                        <h3><span class="gliederung-num">2</span> Abendlied - Gedichtanalyse</h3>
+                        <p>Äußere Form, sprachlich-stilistische Besonderheiten, Inhalt & Deutung</p>
+                    </li>
+                    <li class="gliederung-item" onclick="showSection('quiz')">
+                        <h3><span class="gliederung-num">3</span> Interaktives Quiz</h3>
+                        <p>Teste dein Wissen über Gottfried Keller und das Abendlied</p>
+                    </li>
+                    <li class="gliederung-item" onclick="showSection('schluss')">
+                        <h3><span class="gliederung-num">4</span> Schluss</h3>
+                        <p>Zusammenfassung und zentrale Erkenntnisse</p>
+                    </li>
+                </ul>
+
+                <div style="text-align: center; margin-top: 4rem;">
+                    <button class="farewell-btn" onclick="showSection('biografie')">Präsentation starten -></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BIOGRAFIE -->
+    <section id="biografie" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Biografie</h2>
+                <p>Vom Maler zum Dichter - das bewegte Leben des Gottfried Keller</p>
+            </div>
+
+            <div class="bio-grid">
+                <div class="bio-sidebar">
+                    <div class="bio-image">
+                        <img src="https://kimi-web-img.moonshot.cn/img/upload.wikimedia.org/2c8f289b4cce9c0d1602b44d684b21a09d9f2fd8.jpg" alt="Gottfried Keller Porträt">
+                        <p class="bio-image-caption">Gottfried Keller (1819-1890)<br>Schweizer Dichter und Staatsschreiber</p>
+                    </div>
+                    <div class="bio-image">
+                        <img src="https://kimi-web-img.moonshot.cn/img/cdn.webshopapp.com/a5ad3311e40ad42ddec823cf3b3a8e8b0fccaad9.jpg" alt="Romantische Landschaft">
+                        <p class="bio-image-caption">Romantische Landschaftsmalerei -<br>Kellers erste künstlerische Leidenschaft</p>
+                    </div>
+                </div>
+
+                <div class="bio-text">
+                    <div class="bio-card">
+                        <h3>Wer war er?</h3>
+                        <ul>
+                            <li><strong>Bedeutendster Schweizer Dichter</strong> des 19. Jahrhunderts</li>
+                            <li>Romancier, Novellist und Lyriker des <strong>Realismus</strong></li>
+                            <li>Bekannt für: Der grüne Heinrich, Die Leute von Seldwyla, Zürcher Novellen</li>
+                            <li>Nietzsche nannte die Leute von Seldwyla einen <strong>Schatz der deutschen Prosa</strong></li>
+                            <li>Walter Benjamin zählte ihn zu den <strong>größten Prosaikern</strong> der deutschen Sprache</li>
+                        </ul>
+                    </div>
+
+                    <div class="bio-card">
+                        <h3>Familie & Kindheit</h3>
+                        <ul>
+                            <li>Geboren <strong>19. Juli 1819</strong> in Zürich</li>
+                            <li>Vater: Drechslermeister Rudolf Keller - stirbt <strong>1824</strong> mit nur 33 Jahren</li>
+                            <li>Mutter: Elisabeth Scheuchzer, Arzttochter - zweite Ehe, Scheidung 1834</li>
+                            <li><strong>4 von 6 Geschwistern</strong> sterben im Kleinkindalter</li>
+                            <li>Finanzielle Not nach Vaters Tod - Besuch der <strong>Armenschule</strong></li>
+                            <li>Frühe Begabung für <strong>Malerei und Literatur</strong></li>
+                        </ul>
+                    </div>
+
+                    <div class="bio-card">
+                        <h3>Vom Maler zum Dichter</h3>
+                        <ul>
+                            <li><strong>1834:</strong> Verweis von der Industrieschule - Entschluss, Maler zu werden</li>
+                            <li><strong>1834-1837:</strong> Lehre als Vedutenmaler in Zürich</li>
+                            <li><strong>1840-1842:</strong> Studium in München - scheitert als Maler (Typhus, kein Geld)</li>
+                            <li><strong>1843:</strong> Wendung zur <strong>Lyrik</strong> - erste Gedichte</li>
+                            <li><strong>1845:</strong> Erstveröffentlichung: Lieder eines Autodidakten</li>
+                            <li><strong>1848-1849:</strong> Studium in Heidelberg - Begegnung mit <strong>Ludwig Feuerbach</strong></li>
+                        </ul>
+                    </div>
+
+                    <div class="bio-card">
+                        <h3>Größte Erfolge</h3>
+                        <ul>
+                            <li><strong>1850-1855:</strong> Berliner Jahre - Der grüne Heinrich (Roman)</li>
+                            <li><strong>1856-1874:</strong> Die Leute von Seldwyla (Novellenzyklus)</li>
+                            <li><strong>1861:</strong> Wahl zum <strong>Ersten Staatsschreiber</strong> von Zürich</li>
+                            <li><strong>1876:</strong> Rücktritt - Leben als <strong>freier Schriftsteller</strong></li>
+                            <li><strong>1878-1880:</strong> Zürcher Novellen</li>
+                            <li><strong>1886:</strong> Martin Salander (letzter Roman)</li>
+                        </ul>
+                    </div>
+
+                    <div class="bio-card">
+                        <h3>Privates & Tod</h3>
+                        <ul>
+                            <li>Zeitlebens <strong>unverheiratet</strong></li>
+                            <li><strong>1866:</strong> Verlobte Luise Scheidegger nimmt sich das Leben</li>
+                            <li>Starb <strong>15. Juli 1890</strong> in Zürich</li>
+                            <li>Begräbnis wurde zum <strong>Staatsakt</strong></li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <span class="timeline-year">1819</span>
+                            <span class="timeline-content">Geburt in Zürich</span>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-year">1824</span>
+                            <span class="timeline-content">Tod des Vaters, finanzielle Not</span>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-year">1834</span>
+                            <span class="timeline-content">Verweis von der Schule, Beginn Malerlehre</span>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-year">1840-42</span>
+                            <span class="timeline-content">München - Scheitern als Maler</span>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-year">1845</span>
+                            <span class="timeline-content">Erstveröffentlichung als Dichter</span>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-year">1848-49</span>
+                            <span class="timeline-content">Heidelberg, Feuerbach</span>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-year">1850-55</span>
+                            <span class="timeline-content">Berlin, Der grüne Heinrich</span>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-year">1861</span>
+                            <span class="timeline-content">Staatsschreiber von Zürich</span>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-year">1876</span>
+                            <span class="timeline-content">Freier Schriftsteller</span>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-year">1890</span>
+                            <span class="timeline-content">Tod in Zürich</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+        <!-- ABENDLIED -->
+    <section id="abendlied" class="section">
+        <div class="poem-split">
+            <div class="poem-left">
+                <h3 class="poem-left-title">Abendlied</h3>
+                <p class="poem-left-author">Gottfried Keller . 1879</p>
+
+                <div class="poem-text">
+                    <div class="poem-stanza" data-stanza="1" onclick="highlightStanza(1)" onmouseenter="highlightStanza(1)" onmouseleave="clearHighlight()">
+                        <span class="poem-stanza-num">1</span><br>
+                        Augen, meine lieben Fensterlein,<br>
+                        Gebt mir schon so lange holden Schein,<br>
+                        Lasset freundlich Bild um Bild herein:<br>
+                        Einmal werdet ihr verdunkelt sein!
+                    </div>
+                    <div class="poem-stanza" data-stanza="2" onclick="highlightStanza(2)" onmouseenter="highlightStanza(2)" onmouseleave="clearHighlight()">
+                        <span class="poem-stanza-num">2</span><br>
+                        Fallen einst die müden Lider zu,<br>
+                        Löscht ihr aus, dann hat die Seele Ruh;<br>
+                        Tastend streift sie ab die Wanderschuh',<br>
+                        Legt sich auch in ihre finstre Truh'.
+                    </div>
+                    <div class="poem-stanza" data-stanza="3" onclick="highlightStanza(3)" onmouseenter="highlightStanza(3)" onmouseleave="clearHighlight()">
+                        <span class="poem-stanza-num">3</span><br>
+                        Noch zwei Fünklein sieht sie glimmend stehn,<br>
+                        Wie zwei Sternlein innerlich zu sehn,<br>
+                        Bis sie schwanken und dann auch vergehn,<br>
+                        Wie von eines Falters Flügelwehn.
+                    </div>
+                    <div class="poem-stanza" data-stanza="4" onclick="highlightStanza(4)" onmouseenter="highlightStanza(4)" onmouseleave="clearHighlight()">
+                        <span class="poem-stanza-num">4</span><br>
+                        Doch noch wandl' ich auf dem Abendfeld,<br>
+                        Nur dem sinkenden Gestirn gesellt;<br>
+                        Trinkt, o Augen, was die Wimper hält,<br>
+                        Von dem goldnen Überfluss der Welt!
+                    </div>
+                </div>
+            </div>
+
+            <div class="poem-right">
+                <div class="section-header" style="margin-bottom: 2rem;">
+                    <h2 style="font-size: 2rem;">Abendlied - Gedichtanalyse</h2>
+                </div>
+
+                <div class="analysis-card" id="card-intro">
+                    <h4>Einleitung / Allgemein</h4>
+                    <p><strong>Textsorte:</strong> Lyrik, klassisches Gedicht / Liedform</p>
+                    <p><strong>Epoche:</strong> Realismus</p>
+                    <p><strong>Thema:</strong> Vergänglichkeit des Lebens, Tod als friedlicher Übergang, Natur als Begleiter, Aufforderung zum bewussten Leben</p>
+                    <p style="margin-top: 0.8rem;"><strong>Deutungsvermutung:</strong> Das Gedicht vermittelt die Idee, dass der Tod ein natürlicher, friedlicher Übergang ist und nicht gefürchtet werden muss. Gleichzeitig ruft es dazu auf, das Leben bewusst wahrzunehmen und die Schönheit der Welt zu geniessen, solange man lebt.</p>
+                </div>
+
+                <div class="analysis-card" id="card-form">
+                    <h4>Äußere Form</h4>
+                    <ul>
+                        <li><strong>Metrum:</strong> Jeder Vers hat neun Silben und hat ein vierhebiger Jambus</li>
+                        <li><strong>Strophen und Verse:</strong> 4 Strophen mit je 4 Versen, 16 Verse insgesamt</li>
+                        <li><strong>Kadenz:</strong> Männliche Kadenz</li>
+                        <li><strong>Reimschema:</strong> Alle Strophen weisen einen Haufenreim auf (aaaa, bbbb, cccc, dddd)</li>
+                    </ul>
+                </div>
+
+                <div class="analysis-card" id="card-style">
+                    <h4>Sprachlich-stilistische Besonderheiten</h4>
+
+                    <p style="margin-bottom: 0.5rem;"><strong>Wortwahl:</strong></p>
+                    <ul>
+                        <li>Bildhaft und poetisch, einfach verständlich</li>
+                        <li>Naturbezogen, sanft/weich klingend</li>
+                        <li>Schlichte Alltagssprache</li>
+                    </ul>
+
+                    <p style="margin: 1rem 0 0.5rem;"><strong>Satzbau:</strong></p>
+                    <ul>
+                        <li>Kurze bis mittellange Sätze</li>
+                        <li>Aussagesätze, parataktischer Stil</li>
+                        <li>Mehr Zeilenstil als Enjambements</li>
+                        <li>Wenige Nebensätze</li>
+                    </ul>
+
+                    <p style="margin: 1rem 0 0.5rem;"><strong>Stilfiguren:</strong></p>
+                    <ul>
+                        <li><strong>Metaphern:</strong> Augen = "Fensterlein" (Wahrnehmung, Seele); Tod = "Nacht" (Übergang, Ruhe); Leben = "Wanderung" (Wanderschuh); Bewusstsein = "Fünklein" (letzte Lebensenergie); Sterben = "verlöschen" (wie ein Licht)</li>
+                        <li><strong>Vergleich:</strong> Funken "wie Sternlein" - Wirkung: Romantisierung, Zartheit</li>
+                        <li><strong>Symbolik:</strong> Abend = Lebensabend; Nacht = Tod; Sonne = Leben; Falter = Zerbrechlichkeit</li>
+                        <li><strong>Diminutiv:</strong> ...-lein (Fensterlein, Fünklein, Sternlein)</li>
+                        <li><strong>Euphemismus:</strong> Der Tod wird verharmlost (Lider fallen, Seele hat Ruh)</li>
+                        <li><strong>Hyperbel:</strong> "zwei Fünklein" - poetische Überhöhung der Augen</li>
+                        <li><strong>Inversionen</strong> und <strong>Archaismen</strong></li>
+                    </ul>
+                </div>
+
+                <div class="analysis-card" id="card-strophe1" onmouseenter="highlightStanza(1)" onmouseleave="clearHighlight()">
+                    <h4>Strophe 1 (Verse 1-4)</h4>
+                    <ul>
+                        <li>Das lyrische Ich spricht seine Augen direkt an</li>
+                        <li>Die Augen werden liebevoll "Fensterlein" genannt</li>
+                        <li>Das lyrische Ich sagt, dass die Augen eines Tages "verdunkelt" werden - Hinweis auf den Tod</li>
+                        <li>Die Augen werden dann "still" sein. Der Tod wird als Ruhe, nicht als Schrecken dargestellt</li>
+                    </ul>
+                </div>
+
+                <div class="analysis-card" id="card-strophe2" onmouseenter="highlightStanza(2)" onmouseleave="clearHighlight()">
+                    <h4>Strophe 2 (Verse 5-8)</h4>
+                    <ul>
+                        <li>Wenn die Lider sich schliessen, beginnt der Sterbemoment - Einschlafen in den Tod</li>
+                        <li>Die Seele findet Ruhe. Der Tod ist friedlich, befreiend</li>
+                        <li>Die Seele legt "die Wanderschuh" ab. Das Leben ist eine Wanderung, die nun endet</li>
+                        <li>Die Seele geht in die "Nacht". Nacht ist Symbol für den Tod / Jenseits</li>
+                    </ul>
+                </div>
+
+                <div class="analysis-card" id="card-strophe3" onmouseenter="highlightStanza(3)" onmouseleave="clearHighlight()">
+                    <h4>Strophe 3 (Verse 9-12)</h4>
+                    <ul>
+                        <li>Zwei kleine Funken glimmen noch in den Augen. Die letzten Reste des Bewusstseins / Lebensenergie</li>
+                        <li>Diese Funken werden mit Sternen verglichen. Zartes, poetisches Bild für das Ausklingen des Lebens</li>
+                        <li>Die Funken verlöschen langsam. Der Tod tritt sanft ein</li>
+                        <li>Das Verlöschen wird mit einem Falter verglichen, der in der Nacht verschwindet. Bild für Zerbrechlichkeit und Stille</li>
+                    </ul>
+                </div>
+
+                <div class="analysis-card" id="card-strophe4" onmouseenter="highlightStanza(4)" onmouseleave="clearHighlight()">
+                    <h4>Strophe 4 (Verse 13-16)</h4>
+                    <ul>
+                        <li>Das lyrische Ich lebt noch und wandelt im "Abendfeld". Abend = Lebensabend, späte Lebensphase</li>
+                        <li>Die Sonne scheint mild. Das Leben ist noch schön, warm, friedlich</li>
+                        <li>Die Augen sollen die Welt "trinken". Aufforderung: Geniesse das Leben bewusst</li>
+                        <li>Solange noch Licht da ist, soll man sehen und erleben. Carpe diem: Nutze die Zeit, solange du lebst</li>
+                    </ul>
+                </div>
+
+                <div class="analysis-card" id="card-interpretation">
+                    <h4>Kurz gesagt</h4>
+                    <p>Jeder Vers führt entweder zur Erkenntnis der eigenen Vergänglichkeit oder zur Aufforderung, das Leben bewusst wahrzunehmen. Die ersten drei Strophen beschreiben den Tod, die vierte kehrt überraschend ins Leben zurück.</p>
+                </div>
+
+                <div class="highlight-box">
+                    <h4>Zentrale Aussage</h4>
+                    <p>
+                        Kellers Abendlied ist ein Meisterwerk der späten Lyrik, das den Tod nicht als bedrohlichen Gegner, sondern als natürlichen 
+                        Abschluss des Lebens akzeptiert. Die scheinbar widersprüchliche Verbindung von melancholischer Vergänglichkeitsreflexion und 
+                        lebensbejahendem Hymnus zeigt Kellers reife Weltanschauung: <strong>Der Tod gibt dem Leben erst seinen Wert.</strong> 
+                        Das Gedicht steht damit in der Tradition der <em>vanitas</em>-Meditation, löst sich jedoch von deren moralisierendem Unterton 
+                        und feiert stattdessen die Schönheit des Augenblicks.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- QUIZ -->
+    <section id="quiz" class="section">
+        <div class="quiz-section">
+            <div class="quiz-container">
+                <div class="section-header">
+                    <h2>Interaktives Quiz</h2>
+                    <p>Teste dein Wissen über Gottfried Keller und das Abendlied</p>
+                </div>
+
+                <div class="nickname-input" id="nickname-section">
+                    <h3>Willkommen zum Quiz!</h3>
+                    <p style="margin-bottom: 1.5rem; color: var(--accent);">Gib deinen Nickname ein, um zu starten:</p>
+                    <input type="text" id="nickname" placeholder="Dein Nickname..." maxlength="20">
+                    <button class="quiz-btn" onclick="startQuiz()">Quiz starten</button>
+                </div>
+
+                <div id="quiz-content" style="display: none;">
+                    <div class="quiz-card" id="q1">
+                        <h3>Frage 1 (Multiple Choice)</h3>
+                        <p style="margin-bottom: 1rem; font-size: 1.1rem;">Wann wurde Gottfried Keller geboren?</p>
+                        <div class="quiz-options">
+                            <div class="quiz-option" onclick="checkAnswer(this, false, 'q1')">1815</div>
+                            <div class="quiz-option" onclick="checkAnswer(this, true, 'q1')">1819</div>
+                            <div class="quiz-option" onclick="checkAnswer(this, false, 'q1')">1820</div>
+                            <div class="quiz-option" onclick="checkAnswer(this, false, 'q1')">1825</div>
+                        </div>
+                        <div class="quiz-result" id="result-q1"></div>
+                    </div>
+
+                    <div class="quiz-card" id="q2">
+                        <h3>Frage 2 (Multiple Choice)</h3>
+                        <p style="margin-bottom: 1rem; font-size: 1.1rem;">Welches Werk ist KEIN Werk von Gottfried Keller?</p>
+                        <div class="quiz-options">
+                            <div class="quiz-option" onclick="checkAnswer(this, false, 'q2')">Der grüne Heinrich</div>
+                            <div class="quiz-option" onclick="checkAnswer(this, false, 'q2')">Die Leute von Seldwyla</div>
+                            <div class="quiz-option" onclick="checkAnswer(this, true, 'q2')">Faust</div>
+                            <div class="quiz-option" onclick="checkAnswer(this, false, 'q2')">Zürcher Novellen</div>
+                        </div>
+                        <div class="quiz-result" id="result-q2"></div>
+                    </div>
+
+                    <div class="quiz-card" id="q3">
+                        <h3>Frage 3 (Texteingabe)</h3>
+                        <p style="margin-bottom: 1rem; font-size: 1.1rem;">In welchem Jahr wurde Abendlied veröffentlicht?</p>
+                        <input type="text" class="quiz-input" id="input-q3" placeholder="Deine Antwort...">
+                        <button class="quiz-btn" onclick="checkTextAnswer('q3', '1879')">Prüfen</button>
+                        <div class="quiz-result" id="result-q3"></div>
+                    </div>
+
+                    <div class="quiz-card" id="q4">
+                        <h3>Frage 4 (Multiple Choice)</h3>
+                        <p style="margin-bottom: 1rem; font-size: 1.1rem;">Wie viele Strophen hat das Gedicht Abendlied?</p>
+                        <div class="quiz-options">
+                            <div class="quiz-option" onclick="checkAnswer(this, false, 'q4')">2</div>
+                            <div class="quiz-option" onclick="checkAnswer(this, false, 'q4')">3</div>
+                            <div class="quiz-option" onclick="checkAnswer(this, true, 'q4')">4</div>
+                            <div class="quiz-option" onclick="checkAnswer(this, false, 'q4')">5</div>
+                        </div>
+                        <div class="quiz-result" id="result-q4"></div>
+                    </div>
+
+                    <div class="quiz-card" id="q5">
+                        <h3>Frage 5 (Multiple Choice)</h3>
+                        <p style="margin-bottom: 1rem; font-size: 1.1rem;">Welches Reimschema weist das Gedicht auf?</p>
+                        <div class="quiz-options">
+                            <div class="quiz-option" onclick="checkAnswer(this, false, 'q5')">Kreuzreim (abab)</div>
+                            <div class="quiz-option" onclick="checkAnswer(this, true, 'q5')">Haufenreim (aaaa)</div>
+                            <div class="quiz-option" onclick="checkAnswer(this, false, 'q5')">Paarreim (aabb)</div>
+                            <div class="quiz-option" onclick="checkAnswer(this, false, 'q5')">Umarmender Reim (abba)</div>
+                        </div>
+                        <div class="quiz-result" id="result-q5"></div>
+                    </div>
+
+                    <div class="quiz-card" id="q6">
+                        <h3>Frage 6 (Texteingabe)</h3>
+                        <p style="margin-bottom: 1rem; font-size: 1.1rem;">Welches Metrum hat das Gedicht? (z.B. vierhebiger Jambus)</p>
+                        <input type="text" class="quiz-input" id="input-q6" placeholder="Deine Antwort...">
+                        <button class="quiz-btn" onclick="checkTextAnswer('q6', 'vierhebiger Jambus')">Prüfen</button>
+                        <div class="quiz-result" id="result-q6"></div>
+                    </div>
+
+                    <div class="quiz-card" id="q7">
+                        <h3>Frage 7 (Multiple Choice)</h3>
+                        <p style="margin-bottom: 1rem; font-size: 1.1rem;">Was bedeutet das Diminutiv Fensterlein in der ersten Strophe?</p>
+                        <div class="quiz-options">
+                            <div class="quiz-option" onclick="checkAnswer(this, false, 'q7')">Kleine Fenster im Haus</div>
+                            <div class="quiz-option" onclick="checkAnswer(this, true, 'q7')">Die Augen als Fenster zur Seele/Wahrnehmung</div>
+                            <div class="quiz-option" onclick="checkAnswer(this, false, 'q7')">Brillengläser</div>
+                            <div class="quiz-option" onclick="checkAnswer(this, false, 'q7')">Ein Gemälde</div>
+                        </div>
+                        <div class="quiz-result" id="result-q7"></div>
+                    </div>
+
+                    <div class="quiz-card" id="q8">
+                        <h3>Frage 8 (Multiple Choice)</h3>
+                        <p style="margin-bottom: 1rem; font-size: 1.1rem;">Was symbolisiert der Wanderschuh in der zweiten Strophe?</p>
+                        <div class="quiz-options">
+                            <div class="quiz-option" onclick="checkAnswer(this, false, 'q8')">Eine Wanderung in den Bergen</div>
+                            <div class="quiz-option" onclick="checkAnswer(this, true, 'q8')">Das irdische Leben als Wanderung</div>
+                            <div class="quiz-option" onclick="checkAnswer(this, false, 'q8')">Kellers Zeit als Maler</div>
+                            <div class="quiz-option" onclick="checkAnswer(this, false, 'q8')">Die Reise nach Berlin</div>
+                        </div>
+                        <div class="quiz-result" id="result-q8"></div>
+                    </div>
+
+                    <div class="quiz-card" id="q9">
+                        <h3>Frage 9 (Texteingabe)</h3>
+                        <p style="margin-bottom: 1rem; font-size: 1.1rem;">Wie viele Silben hat jeder Vers im Abendlied?</p>
+                        <input type="text" class="quiz-input" id="input-q9" placeholder="Deine Antwort...">
+                        <button class="quiz-btn" onclick="checkTextAnswer('q9', '9')">Prüfen</button>
+                        <div class="quiz-result" id="result-q9"></div>
+                    </div>
+
+                    <div class="quiz-card" id="q10">
+                        <h3>Frage 10 (Multiple Choice)</h3>
+                        <p style="margin-bottom: 1rem; font-size: 1.1rem;">Welche Epoche wird dem Gedicht zugeordnet?</p>
+                        <div class="quiz-options">
+                            <div class="quiz-option" onclick="checkAnswer(this, false, 'q10')">Romantik</div>
+                            <div class="quiz-option" onclick="checkAnswer(this, true, 'q10')">Realismus (mit romantischen Elementen)</div>
+                            <div class="quiz-option" onclick="checkAnswer(this, false, 'q10')">Expressionismus</div>
+                            <div class="quiz-option" onclick="checkAnswer(this, false, 'q10')">Klassik</div>
+                        </div>
+                        <div class="quiz-result" id="result-q10"></div>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 3rem;">
+                        <button class="quiz-btn" onclick="finishQuiz()" style="font-size: 1.3rem; padding: 15px 40px;">Quiz beenden & Ergebnis anzeigen</button>
+                    </div>
+                </div>
+
+                <div class="leaderboard" id="leaderboard" style="display: none;">
+                    <h3>Rangliste</h3>
+                    <div id="leaderboard-content"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HANDOUT -->
+    <section id="handout" class="section">
+        <div class="handout-section">
+            <div class="handout-container">
+                <h2 class="handout-title">Handout</h2>
+                <p class="handout-subtitle">
+                    Lade dir das Handout zur Präsentation als PDF herunter – mit allen wichtigen Informationen 
+                    zu Gottfried Keller und dem Gedicht „Abendlied" zum Mitnehmen.
+                </p>
+
+                <div class="handout-card">
+                    <h3>PDF herunterladen</h3>
+                    <p style="color: var(--accent); margin-bottom: 1.5rem;">
+                        Lade das Handout direkt als PDF auf dein Gerät herunter.
+                    </p>
+                    <a href="Handout.pdf" class="download-btn" download="Handout_Gottfried_Keller.pdf" target="_self">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+                        </svg>
+                        Handout als PDF herunterladen
+                    </a>
+                </div>
+
+                <div class="handout-info">
+                    <div class="handout-info-item">
+                        <h4>Inhalt</h4>
+                        <p>Kurzbiografie, Gedichttext & Analyse</p>
+                    </div>
+                    <div class="handout-info-item">
+                        <h4>Format</h4>
+                        <p>PDF – druck- & mobilfreundlich</p>
+                    </div>
+                    <div class="handout-info-item">
+                        <h4>Autoren</h4>
+                        <p>Maurice Friese & Tom Gruß</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SCHLUSS -->
+    <section id="schluss" class="section">
+        <div class="farewell-section">
+            <div class="farewell-content">
+                <h2>Zusammenfassung</h2>
+                <p>
+                    Gottfried Keller war einer der bedeutendsten deutschsprachigen Autoren des 19. Jahrhunderts. 
+                    Sein Leben war geprägt von wirtschaftlicher Not, künstlerischem Scheitern und schließlich 
+                    literarischem Ruhm. Als Staatsschreiber von Zürich fand er die finanzielle Sicherheit, 
+                    die ihm ermöglichte, als freier Schriftsteller zu arbeiten.
+                </p>
+                <p>
+                    Sein Gedicht <strong>Abendlied</strong> (1879) zeigt die Reife eines Dichters, der den Tod 
+                    nicht fürchtet, sondern als natürlichen Teil des Lebens akzeptiert. Die Verbindung von 
+                    Vergänglichkeitsbewusstsein und Lebensbejahung macht das Gedicht zu einem zeitlosen 
+                    Meisterwerk der deutschen Lyrik.
+                </p>
+                <div class="farewell-quote">
+                    Trinkt, o Augen, was die Wimper hält,<br>
+                    Von dem goldnen Überfluss der Welt!
+                </div>
+                <button class="farewell-btn" onclick="showSection('start')">Zurück zum Anfang</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- MODAL -->
+    <div class="modal-overlay" id="modal">
+        <div class="modal">
+            <h3>Quiz verlassen?</h3>
+            <p>Bist du sicher, dass du das Quiz verlassen möchtest? Dein Fortschritt wird gelöscht!</p>
+            <div class="modal-buttons">
+                <button class="modal-btn yes" onclick="confirmLeaveQuiz()">Ja, verlassen</button>
+                <button class="modal-btn no" onclick="closeModal()">Nein, bleiben</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Gottfried Keller - Leben, Schaffen & Lyrik | Von Maurice Friese und Tom Gruß</p>
+        <p style="margin-top: 0.5rem; font-size: 0.85rem;">Quellen: Gottfried Keller-Gesellschaft, Abipur.de</p>
+    </footer>
+
+   <script>
+        // ============================================================
+        // POCKETBASE CLOUD LEADERBOARD
+        // ============================================================
+        // Diese Version nutzt PocketBase fuer ein gerateuebergreifendes
+        // Leaderboard. PocketBase ist ein selbst-hostbares Backend.
+        //
+        // FUER SOFORTIGEN TEST (ohne eigenen Server):
+        // Die Datei nutzt localStorage als Fallback, bis ein PocketBase-
+        // Server konfiguriert ist.
+        //
+        // EIGENER POCKETBASE-SERVER (empfohlen fuer Klassen):
+        // 1. Lade PocketBase herunter: https://pocketbase.io/docs/
+        // 2. Starte die .exe / binary
+        // 3. Oeffne http://localhost:8090/_/ (Admin-Panel)
+        // 4. Erstelle eine Collection "leaderboard" mit Feldern:
+        //    - name (Text)
+        //    - score (Number)
+        //    - date (Text)
+        //    - timestamp (Text)
+        // 5. Setze API Rules auf "@request.auth.id != '' || true"
+        //    fuer Lesen und Schreiben (oeffentlicher Zugriff)
+        // 6. Trage deine URL unten ein
+        // ============================================================
+
+        var POCKETBASE_URL = '';  // <-- DEINE POCKETBASE-URL HIER (z.B. 'http://localhost:8090' oder 'https://dein-server.fly.dev')
+        var USE_POCKETBASE = (POCKETBASE_URL !== '');
+
+        var currentNickname = '';
+        var quizScore = 0;
+        var quizStarted = false;
+        var pendingSection = '';
+        var leaderboardData = [];
+        var isLoading = false;
+        var pb = null;
+
+        // Try to initialize PocketBase if URL is configured
+        if (USE_POCKETBASE && typeof window !== 'undefined') {
+            try {
+                // PocketBase JS SDK would be loaded via CDN
+                // For now we use plain XMLHttpRequest to avoid dependency issues
+            } catch (e) {
+                USE_POCKETBASE = false;
+            }
+        }
+
+        // Load leaderboard from PocketBase (or fallback to localStorage)
+        function loadLeaderboard(callback) {
+            if (USE_POCKETBASE) {
+                isLoading = true;
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', POCKETBASE_URL + '/api/collections/leaderboard/records?sort=-score&perPage=50', true);
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.timeout = 5000;
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4) {
+                        isLoading = false;
+                        if (xhr.status === 200) {
+                            try {
+                                var response = JSON.parse(xhr.responseText);
+                                if (response.items && Array.isArray(response.items)) {
+                                    leaderboardData = response.items.map(function(item) {
+                                        return {
+                                            name: item.name,
+                                            score: item.score,
+                                            date: item.date,
+                                            timestamp: item.timestamp
+                                        };
+                                    });
+                                } else {
+                                    leaderboardData = [];
+                                }
+                            } catch (e) {
+                                leaderboardData = [];
+                            }
+                        } else {
+                            fallbackToLocalStorage();
+                        }
+                        if (callback) callback();
+                    }
+                };
+                xhr.onerror = function() {
+                    isLoading = false;
+                    fallbackToLocalStorage();
+                    if (callback) callback();
+                };
+                xhr.ontimeout = function() {
+                    isLoading = false;
+                    fallbackToLocalStorage();
+                    if (callback) callback();
+                };
+                xhr.send();
+            } else {
+                fallbackToLocalStorage();
+                if (callback) callback();
+            }
+        }
+
+        function fallbackToLocalStorage() {
+            try {
+                var stored = localStorage.getItem('kellerQuizLeaderboard');
+                leaderboardData = stored ? JSON.parse(stored) : [];
+            } catch (e) {
+                leaderboardData = [];
+            }
+        }
+
+        // Save leaderboard to PocketBase
+        function saveLeaderboard(callback) {
+            if (USE_POCKETBASE) {
+                if (isLoading) {
+                    setTimeout(function() { saveLeaderboard(callback); }, 500);
+                    return;
+                }
+
+                // Save the latest entry to PocketBase
+                var latestEntry = leaderboardData[leaderboardData.length - 1];
+                if (!latestEntry) {
+                    if (callback) callback(true);
+                    return;
+                }
+
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', POCKETBASE_URL + '/api/collections/leaderboard/records', true);
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.timeout = 5000;
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4) {
+                        var success = (xhr.status === 200 || xhr.status === 201);
+                        if (!success) {
+                            try {
+                                localStorage.setItem('kellerQuizLeaderboard', JSON.stringify(leaderboardData));
+                            } catch (e) {}
+                        }
+                        if (callback) callback(success);
+                    }
+                };
+                xhr.onerror = function() {
+                    try {
+                        localStorage.setItem('kellerQuizLeaderboard', JSON.stringify(leaderboardData));
+                    } catch (e) {}
+                    if (callback) callback(false);
+                };
+                xhr.ontimeout = function() {
+                    try {
+                        localStorage.setItem('kellerQuizLeaderboard', JSON.stringify(leaderboardData));
+                    } catch (e) {}
+                    if (callback) callback(false);
+                };
+                xhr.send(JSON.stringify({
+                    name: latestEntry.name,
+                    score: latestEntry.score,
+                    date: latestEntry.date,
+                    timestamp: latestEntry.timestamp
+                }));
+            } else {
+                try {
+                    localStorage.setItem('kellerQuizLeaderboard', JSON.stringify(leaderboardData));
+                } catch (e) {}
+                if (callback) callback(true);
+            }
+        }
+
+        // Refresh leaderboard display
+        function refreshLeaderboardDisplay() {
+            var content = document.getElementById('leaderboard-content');
+            if (!content) return;
+
+            leaderboardData.sort(function(a, b) { return b.score - a.score; });
+
+            var html = '<div style="text-align: center; margin-bottom: 2rem; padding: 1.5rem; background: var(--highlight); border-radius: 10px;">' +
+                '<h4 style="font-size: 1.5rem; color: var(--dark); margin-bottom: 0.5rem;">Dein Ergebnis: ' + quizScore + ' / 10 Punkte</h4>' +
+                '<p style="color: var(--accent);">' + (currentNickname || 'Du') + '</p>' +
+                '</div>';
+
+if (leaderboardData.length === 0) {
+                html += '<p style="text-align: center; color: var(--accent); padding: 2rem;">Noch keine Einträge. Sei der Erste!</p>';
+            } else {
+                var index;
+                for (index = 0; index < leaderboardData.length && index < 20; index++) {
+                    var entry = leaderboardData[index];
+                    var isCurrentUser = entry.name === currentNickname && entry.score === quizScore;
+                    var bgStyle = isCurrentUser ? 'background: var(--highlight); border-radius: 10px; font-weight: 700;' : '';
+
+                    html += '<div class="leaderboard-item" style="' + bgStyle + '">' +
+                        '<div style="display: flex; align-items: center; gap: 1rem;">' +
+                        '<span class="leaderboard-rank">#' + (index + 1) + '</span>' +
+                        '<span>' + escapeHtml(entry.name) + '</span>' +
+                        '</div>' +
+                        '<div style="display: flex; align-items: center; gap: 1rem;">' +
+                        '<span style="font-weight: 700; color: var(--gold);">' + entry.score + ' Punkte</span>' +
+                        '<span style="color: var(--accent); font-size: 0.9rem;">' + (entry.date || '') + '</span>' +
+                        '</div>' +
+                        '</div>';
+                }
+            }
+
+            html += '<div style="text-align: center; margin-top: 2rem;">' +
+                '<button class="quiz-btn" onclick="resetQuiz()">Neu starten</button>' +
+                '<button class="quiz-btn" onclick="refreshLeaderboardFromCloud()" style="margin-left: 1rem; background: var(--dark);">Aktualisieren</button>' +
+                '</div>';
+
+            content.innerHTML = html;
+        }
+
+        // Escape HTML to prevent XSS
+        function escapeHtml(text) {
+            var div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Manual refresh button
+        function refreshLeaderboardFromCloud() {
+            var btn = document.querySelector('button[onclick="refreshLeaderboardFromCloud()"]');
+            if (btn) btn.textContent = 'Lade...';
+
+            loadLeaderboard(function() {
+                refreshLeaderboardDisplay();
+            });
+        }
+
+        function toggleNav() {
+            var toggle = document.querySelector('.nav-toggle');
+            var menu = document.getElementById('nav-menu');
+            var overlay = document.querySelector('.nav-overlay');
+
+            if (toggle && menu) {
+                var isOpening = !menu.classList.contains('open');
+                toggle.classList.toggle('open');
+                menu.classList.toggle('open');
+                if (overlay) overlay.classList.toggle('show');
+
+                // Prevent body scroll when menu is open
+                if (isOpening) {
+                    document.body.style.overflow = 'hidden';
+                    document.body.style.touchAction = 'none';
+                } else {
+                    document.body.style.overflow = '';
+                    document.body.style.touchAction = '';
+                }
+            }
+        }
+
+        function closeNav() {
+            var toggle = document.querySelector('.nav-toggle');
+            var menu = document.getElementById('nav-menu');
+            var overlay = document.querySelector('.nav-overlay');
+
+            if (toggle) toggle.classList.remove('open');
+            if (menu) menu.classList.remove('open');
+            if (overlay) overlay.classList.remove('show');
+            document.body.style.overflow = '';
+            document.body.style.touchAction = '';
+        }
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            var menu = document.getElementById('nav-menu');
+            var toggle = document.querySelector('.nav-toggle');
+
+            if (menu && menu.classList.contains('open')) {
+                var isClickInside = menu.contains(event.target) || toggle.contains(event.target);
+                if (!isClickInside) {
+                    closeNav();
+                }
+            }
+        });
+
+        // Close menu on Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeNav();
+            }
+        });
+
+        function showSection(sectionId) {
+            if (quizStarted && sectionId !== 'quiz') {
+                pendingSection = sectionId;
+                document.getElementById('modal').classList.add('show');
+                return;
+            }
+
+            var sections = document.querySelectorAll('.section');
+            var i;
+            for (i = 0; i < sections.length; i++) {
+                sections[i].classList.remove('active');
+            }
+
+            var targetSection = document.getElementById(sectionId);
+            if (targetSection) targetSection.classList.add('active');
+
+            var navLinks = document.querySelectorAll('.nav-link');
+            for (i = 0; i < navLinks.length; i++) {
+                navLinks[i].classList.remove('active');
+            }
+
+            var allLinks = document.querySelectorAll('.nav-link');
+            for (i = 0; i < allLinks.length; i++) {
+                var onclickAttr = allLinks[i].getAttribute('onclick');
+                if (onclickAttr && onclickAttr.indexOf("'" + sectionId + "'") !== -1) {
+                    allLinks[i].classList.add('active');
+                    break;
+                }
+            }
+
+            window.scrollTo(0, 0);
+        }
+
+        function highlightStanza(num) {
+            clearHighlight();
+
+            var stanzas = document.querySelectorAll('.poem-stanza[data-stanza="' + num + '"]');
+            var i;
+            for (i = 0; i < stanzas.length; i++) {
+                stanzas[i].classList.add('active');
+            }
+
+            var cardMap = {
+                1: 'card-strophe1',
+                2: 'card-strophe2', 
+                3: 'card-strophe3',
+                4: 'card-strophe4'
+            };
+
+            var cardId = cardMap[num];
+            if (cardId) {
+                var card = document.getElementById(cardId);
+                if (card) {
+                    card.classList.add('highlighted');
+                    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }
+        }
+
+        function clearHighlight() {
+            var stanzas = document.querySelectorAll('.poem-stanza');
+            var i;
+            for (i = 0; i < stanzas.length; i++) {
+                stanzas[i].classList.remove('active');
+            }
+            var cards = document.querySelectorAll('.analysis-card');
+            for (i = 0; i < cards.length; i++) {
+                cards[i].classList.remove('highlighted');
+            }
+        }
+
+        function startQuiz() {
+            var nickname = document.getElementById('nickname').value.trim();
+            if (!nickname) {
+                alert('Bitte gib einen Nickname ein!');
+                return;
+            }
+            currentNickname = nickname;
+            quizStarted = true;
+            quizScore = 0;
+            document.getElementById('nickname-section').style.display = 'none';
+            document.getElementById('quiz-content').style.display = 'block';
+            document.getElementById('leaderboard').style.display = 'none';
+        }
+
+        function checkAnswer(element, isCorrect, questionId) {
+            var card = element.closest('.quiz-card');
+            var options = card.querySelectorAll('.quiz-option');
+            var result = document.getElementById('result-' + questionId);
+            var j;
+
+            for (j = 0; j < options.length; j++) {
+                options[j].style.pointerEvents = 'none';
+            }
+
+            if (isCorrect) {
+                element.classList.add('correct');
+                result.textContent = 'Richtig! +1 Punkt';
+                result.className = 'quiz-result show correct';
+                quizScore++;
+            } else {
+                element.classList.add('wrong');
+                result.textContent = 'Falsch! Die richtige Antwort war eine andere.';
+                result.className = 'quiz-result show wrong';
+
+                for (j = 0; j < options.length; j++) {
+                    var onclickStr = options[j].getAttribute('onclick') || '';
+                    if (onclickStr.indexOf('true') !== -1) {
+                        options[j].classList.add('correct');
+                    }
+                }
+            }
+        }
+
+        function checkTextAnswer(questionId, correctAnswer) {
+            var input = document.getElementById('input-' + questionId);
+            var result = document.getElementById('result-' + questionId);
+            var userAnswer = input.value.trim().toLowerCase();
+
+            if (!userAnswer) {
+                alert('Bitte gib eine Antwort ein!');
+                return;
+            }
+
+            input.disabled = true;
+
+            var isCorrect = false;
+            if (userAnswer === correctAnswer.toLowerCase()) {
+                isCorrect = true;
+            } else if (questionId === 'q6' && userAnswer.indexOf('jambus') !== -1) {
+                isCorrect = true;
+            } else if (questionId === 'q9' && userAnswer === '9') {
+                isCorrect = true;
+            }
+
+            if (isCorrect) {
+                result.textContent = 'Richtig! +1 Punkt';
+                result.className = 'quiz-result show correct';
+                quizScore++;
+            } else {
+                result.textContent = 'Falsch! Die richtige Antwort war: ' + correctAnswer;
+                result.className = 'quiz-result show wrong';
+            }
+        }
+
+        function finishQuiz() {
+            quizStarted = false;
+
+            var entry = {
+                name: currentNickname,
+                score: quizScore,
+                date: new Date().toLocaleDateString('de-DE'),
+                timestamp: new Date().toISOString()
+            };
+
+            loadLeaderboard(function() {
+                leaderboardData.push(entry);
+                leaderboardData.sort(function(a, b) { return b.score - a.score; });
+
+                saveLeaderboard(function(success) {
+                    document.getElementById('quiz-content').style.display = 'none';
+                    document.getElementById('leaderboard').style.display = 'block';
+                    refreshLeaderboardDisplay();
+                });
+            });
+        }
+
+        function resetQuiz() {
+            document.getElementById('nickname-section').style.display = 'block';
+            document.getElementById('quiz-content').style.display = 'none';
+            document.getElementById('leaderboard').style.display = 'none';
+            document.getElementById('nickname').value = '';
+
+            var options = document.querySelectorAll('.quiz-option');
+            var i;
+            for (i = 0; i < options.length; i++) {
+                options[i].classList.remove('correct', 'wrong', 'selected');
+                options[i].style.pointerEvents = 'auto';
+            }
+
+            var inputs = document.querySelectorAll('.quiz-input');
+            for (i = 0; i < inputs.length; i++) {
+                inputs[i].value = '';
+                inputs[i].disabled = false;
+            }
+
+            var results = document.querySelectorAll('.quiz-result');
+            for (i = 0; i < results.length; i++) {
+                results[i].classList.remove('show');
+            }
+
+            quizScore = 0;
+        }
+
+        function confirmLeaveQuiz() {
+            quizStarted = false;
+            quizScore = 0;
+            closeModal();
+
+            var options = document.querySelectorAll('.quiz-option');
+            var i;
+            for (i = 0; i < options.length; i++) {
+                options[i].classList.remove('correct', 'wrong', 'selected');
+                options[i].style.pointerEvents = 'auto';
+            }
+
+            var inputs = document.querySelectorAll('.quiz-input');
+            for (i = 0; i < inputs.length; i++) {
+                inputs[i].value = '';
+                inputs[i].disabled = false;
+            }
+
+            var results = document.querySelectorAll('.quiz-result');
+            for (i = 0; i < results.length; i++) {
+                results[i].classList.remove('show');
+            }
+
+            if (pendingSection) {
+                showSection(pendingSection);
+                pendingSection = '';
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.remove('show');
+            pendingSection = '';
+        }
+
+        // Load leaderboard when page loads
+        window.onload = function() {
+            loadLeaderboard();
+        };
+    </script>
+
+<div id="scores"></div>
+
+<script>
+const POCKETBASE_URL = "http://192.168.2.81:8090";
+const COLLECTION = "leaderboard";
+
+async function loadScores() {
+  try {
+    const res = await fetch(`${POCKETBASE_URL}/api/collections/${COLLECTION}/records`);
+    const data = await res.json();
+
+    const box = document.getElementById("scores");
+
+    if (!box) {
+      console.log("scores-div nicht gefunden");
+      return;
+    }
+
+    if (!data.items || data.items.length === 0) {
+      box.innerHTML = "<p>Noch keine Einträge vorhanden.</p>";
+      return;
+    }
+
+    box.innerHTML = data.items.map(item =>
+      `<p>${item.name} - ${item.score} Punkte</p>`
+    ).join("");
+  } catch (error) {
+    console.error("Fehler beim Laden:", error);
+  }
+}
+
+loadScores();
+</script>
+
+
+
+</body>
+</html>
